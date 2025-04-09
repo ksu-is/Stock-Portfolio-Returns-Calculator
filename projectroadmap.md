@@ -3,6 +3,7 @@
 - [X] Create Roadmap
 - [X] Turn in Sprint 1
 - [X] Begin coding
+- [X] Create rough draft/outline of the code
 - [ ] Post first progress update
 - [ ] Post continuous updates
 - [ ] Refine and test code
