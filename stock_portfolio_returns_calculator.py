@@ -11,3 +11,4 @@ def current_stock_price():
 
 current_stock_price()
 #Gets current stock price once you enter in the ticker symbol for any stock
+#Example: You enter in "AMZN" and the output says "The current price of AMZN is $181.96"
