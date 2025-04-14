@@ -7,6 +7,7 @@ def get_stock_data(ticker, shares, buy_price):
         total_cost = shares * buy_price
         current_value = shares * current_price
         profit_or_loss = current_value - total_cost
+        return_pct = (profit_or_loss / total_cost) * 100 if total_cost != 0 else 0
 
         return {
             "ticker": ticker,
@@ -15,7 +16,8 @@ def get_stock_data(ticker, shares, buy_price):
             "current_price": current_price,
             "total_cost": total_cost,
             "current_value": current_value,
-            "profit_or_loss": profit_or_loss
+            "profit_or_loss": profit_or_loss,
+            "return_pct": return_pct
         }
 
     except KeyError:
@@ -53,15 +55,18 @@ def main():
             print(f"  Total Cost: ${stock['total_cost']:.2f}")
             print(f"  Current Value: ${stock['current_value']:.2f}")
             print(f"  Profit/Loss: ${stock['profit_or_loss']:.2f}")
+            print(f"  Return: {stock['return_pct']:.2f}%")
             total_cost += stock['total_cost']
             total_value += stock['current_value']
 
         total_pl = total_value - total_cost
+        total_return_pct = (total_pl / total_cost) * 100 if total_cost != 0 else 0
         print("\n=============================")
         print(f"Total Cost: ${total_cost:.2f}")
         print(f"Total Current Value: ${total_value:.2f}")
         print(f"Total Profit/Loss: ${total_pl:.2f}")
+        print(f"Total Return: {total_return_pct:.2f}%")
     else:
-        print("No stocks were entered.")
+        print("No valid stocks were entered.")
 
 main()
