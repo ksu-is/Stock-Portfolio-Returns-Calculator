@@ -4,7 +4,7 @@
 - [X] Turn in Sprint 1
 - [X] Begin coding
 - [X] Create rough draft/outline of the code
-- [ ] Post first progress update
-- [ ] Post continuous updates
+- [X] Post first progress update
+- [X] Post continuous updates
 - [ ] Refine and test code
 - [ ] Create Powerpoint
