@@ -5,6 +5,10 @@
 - [X] Begin coding
 - [X] Create rough draft/outline of the code
 - [X] Post first progress update
-- [X] Post continuous updates
+- [X] Post second progress update
+- [X] Post third progress update
+- [ ] Post fourth progress update
+- [ ] Post fifth progress update
+- [ ] Post sixth progress update
 - [ ] Refine and test code
 - [ ] Create Powerpoint
