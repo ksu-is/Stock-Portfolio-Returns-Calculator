@@ -3,7 +3,11 @@ import yfinance as yf
 def get_stock_data(ticker, shares, buy_price):
     stock = yf.Ticker(ticker)
     try:
-        current_price = stock.info["currentPrice"]
+        info = stock.info
+        current_price = info["currentPrice"]
+        sector = info.get("sector", "N/A")
+        market_cap = info.get("marketCap", None)
+
         total_cost = shares * buy_price
         current_value = shares * current_price
         profit_or_loss = current_value - total_cost
@@ -17,11 +21,16 @@ def get_stock_data(ticker, shares, buy_price):
             "total_cost": total_cost,
             "current_value": current_value,
             "profit_or_loss": profit_or_loss,
-            "return_pct": return_pct
+            "return_pct": return_pct,
+            "sector": sector,
+            "market_cap": market_cap
         }
 
     except KeyError:
         print(f"Unable to retrieve data for {ticker}. Skipping.")
+        return None
+    except Exception as e:
+        print(f"Error fetching data for {ticker}: {e}")
         return None
 
 def show_moving_average_and_volume(ticker, ma_choice):
@@ -83,6 +92,8 @@ def main():
         print("\n----- Portfolio Summary -----")
         for stock in portfolio:
             print(f"\n{stock['ticker']}")
+            print(f"  Sector: {stock['sector']}")
+            print(f"  Market Cap: {stock['market_cap']:,}" if stock['market_cap'] else "  Market Cap: N/A")
             print(f"  Shares Owned: {stock['shares']}")
             print(f"  Buy Price: ${stock['buy_price']:.2f}")
             print(f"  Current Price: ${stock['current_price']:.2f}")
