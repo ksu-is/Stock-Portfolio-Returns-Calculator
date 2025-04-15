@@ -7,8 +7,8 @@
 - [X] Post first progress update
 - [X] Post second progress update
 - [X] Post third progress update
-- [ ] Post fourth progress update
-- [ ] Post fifth progress update
-- [ ] Post sixth progress update
+- [X] Post fourth progress update
+- [X] Post fifth progress update
+- [X] Post sixth progress update
 - [ ] Refine and test code
 - [ ] Create Powerpoint
