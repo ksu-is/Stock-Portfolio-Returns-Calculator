@@ -24,8 +24,11 @@ def get_stock_data(ticker, shares, buy_price):
         print(f"Unable to retrieve data for {ticker}. Skipping.")
         return None
 
-def show_moving_average(ticker, ma_choice):
+def show_moving_average_and_volume(ticker, ma_choice):
     stock = yf.Ticker(ticker)
+
+    # Moving average
+    ma = None
     if ma_choice == "50":
         ma = stock.info.get("fiftyDayAverage", None)
         if ma:
@@ -38,6 +41,13 @@ def show_moving_average(ticker, ma_choice):
             print(f"200-Day Moving Average for {ticker}: ${ma:.2f}")
         else:
             print("200-Day Moving Average data not available.")
+
+    # Volume
+    volume = stock.info.get("volume", None)
+    if volume:
+        print(f"Current Share Volume for {ticker}: {volume:,}")
+    else:
+        print("Volume data not available.")
 
 def main():
     portfolio = []
@@ -57,7 +67,7 @@ def main():
                 "Type '50' for 50-day, '200' for 200-day, or press Enter to skip: "
             ).strip()
             if ma_choice in ["50", "200"]:
-                show_moving_average(ticker, ma_choice)
+                show_moving_average_and_volume(ticker, ma_choice)
 
             # Get and store stock data
             stock_data = get_stock_data(ticker, shares, buy_price)
