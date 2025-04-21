@@ -11,5 +11,6 @@
 - [X] Post fifth progress update
 - [X] Post sixth progress update
 - [X] Post seventh progress update
+- [X] Post eighth progress update
 - [ ] Refine and test code
 - [ ] Create Powerpoint
