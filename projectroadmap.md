@@ -10,7 +10,9 @@
 - [X] Post fourth progress update
 - [X] Post fifth progress update
 - [X] Post sixth progress update
+- [X] Complete Sprint 2
 - [X] Post seventh progress update
 - [X] Post eighth progress update
-- [ ] Refine and test code
+- [X] Refine and test code
+- [X] Complete Sprint 3
 - [ ] Create Powerpoint
