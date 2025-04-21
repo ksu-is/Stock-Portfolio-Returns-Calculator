@@ -36,7 +36,6 @@ def get_stock_data(ticker, shares, buy_price):
 def show_moving_average_and_volume(ticker, ma_choice):
     stock = yf.Ticker(ticker)
 
-    # Moving average
     ma = None
     if ma_choice == "50":
         ma = stock.info.get("fiftyDayAverage", None)
@@ -51,14 +50,35 @@ def show_moving_average_and_volume(ticker, ma_choice):
         else:
             print("200-Day Moving Average data not available.")
 
-    # Volume
     volume = stock.info.get("volume", None)
     if volume:
         print(f"Current Share Volume for {ticker}: {volume:,}")
     else:
         print("Volume data not available.")
 
+def assess_market_condition():
+    try:
+        dow = yf.Ticker("^DJI")
+        hist = dow.history(period="2d")
+        if len(hist) < 2:
+            return "Unable to assess the market today."
+        yesterday_close = hist["Close"].iloc[-2]
+        today_close = hist["Close"].iloc[-1]
+        pct_change = ((today_close - yesterday_close) / yesterday_close) * 100
+
+        if pct_change > 0.5:
+            return f"Market Status: Good 📈 (DJIA change: {pct_change:.2f}%)"
+        elif pct_change < -0.5:
+            return f"Market Status: Bad 📉 (DJIA change: {pct_change:.2f}%)"
+        else:
+            return f"Market Status: Mediocre ⚖️ (DJIA change: {pct_change:.2f}%)"
+    except Exception as e:
+        return f"Could not retrieve market data: {e}"
+
 def main():
+    print("\n===== STOCK MARKET CHECK =====")
+    print(assess_market_condition())
+
     portfolio = []
 
     while True:
@@ -70,7 +90,6 @@ def main():
             shares = float(input(f"How many shares of {ticker} do you own? "))
             buy_price = float(input(f"What price did you buy {ticker} at? "))
 
-            # Ask for moving average choice
             ma_choice = input(
                 f"Would you like to view a moving average for {ticker}?\n"
                 "Type '50' for 50-day, '200' for 200-day, or press Enter to skip: "
@@ -78,14 +97,12 @@ def main():
             if ma_choice in ["50", "200"]:
                 show_moving_average_and_volume(ticker, ma_choice)
 
-            # Get and store stock data
             stock_data = get_stock_data(ticker, shares, buy_price)
             if stock_data:
                 portfolio.append(stock_data)
         except ValueError:
             print("Invalid input. Try again.")
 
-    # Display portfolio summary
     if portfolio:
         total_cost = 0
         total_value = 0
