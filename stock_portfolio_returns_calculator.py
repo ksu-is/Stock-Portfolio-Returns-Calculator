@@ -7,6 +7,7 @@ def get_stock_data(ticker, shares, buy_price):
         current_price = info["currentPrice"]
         sector = info.get("sector", "N/A")
         market_cap = info.get("marketCap", None)
+        beta = info.get("beta", None)
 
         total_cost = shares * buy_price
         current_value = shares * current_price
@@ -23,7 +24,8 @@ def get_stock_data(ticker, shares, buy_price):
             "profit_or_loss": profit_or_loss,
             "return_pct": return_pct,
             "sector": sector,
-            "market_cap": market_cap
+            "market_cap": market_cap,
+            "beta": beta
         }
 
     except KeyError:
@@ -32,6 +34,7 @@ def get_stock_data(ticker, shares, buy_price):
     except Exception as e:
         print(f"Error fetching data for {ticker}: {e}")
         return None
+
 
 def show_moving_average_and_volume(ticker, ma_choice):
     stock = yf.Ticker(ticker)
@@ -116,6 +119,7 @@ def main():
             print(f"  Current Price: ${stock['current_price']:.2f}")
             print(f"  Total Cost: ${stock['total_cost']:.2f}")
             print(f"  Current Value: ${stock['current_value']:.2f}")
+            print(f"  Beta: {stock['beta']:.2f}" if stock['beta'] is not None else "  Beta: N/A")
             print(f"  Profit/Loss: ${stock['profit_or_loss']:.2f}")
             print(f"  Return: {stock['return_pct']:.2f}%")
             total_cost += stock['total_cost']
