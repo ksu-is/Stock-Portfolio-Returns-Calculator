@@ -1,3 +1,4 @@
+# AI use notice. ChatGPT was used to assist with the code.
 import yfinance as yf
 
 def get_stock_data(ticker, shares, buy_price):
